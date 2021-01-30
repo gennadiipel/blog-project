@@ -6,6 +6,8 @@ import { AdminLayoutComponent } from './shared/components/admin-layout/admin-lay
 import { DashboardPageComponent } from './components/dashboard-page/dashboard-page.component';
 import { CreatePageComponent } from './components/create-page/create-page.component';
 import { EditPageComponent } from './components/edit-page/edit-page.component';
+import { MatToolbarModule } from "@angular/material/toolbar";
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 @NgModule({
     declarations: [
@@ -17,6 +19,8 @@ import { EditPageComponent } from './components/edit-page/edit-page.component';
       ],
       imports: [
         CommonModule,
+        MatToolbarModule,
+        MatSidenavModule,
         RouterModule.forChild([
           {
             path: '', component: AdminLayoutComponent, children: [
