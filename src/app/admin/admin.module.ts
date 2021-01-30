@@ -8,6 +8,10 @@ import { CreatePageComponent } from './components/create-page/create-page.compon
 import { EditPageComponent } from './components/edit-page/edit-page.component';
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatIconModule } from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button';
+import {MatListModule} from '@angular/material/list';
+import { FormsModule } from "@angular/forms";
 
 @NgModule({
     declarations: [
@@ -15,12 +19,16 @@ import { MatSidenavModule } from '@angular/material/sidenav';
         LoginPageComponent,
         DashboardPageComponent,
         CreatePageComponent,
-        EditPageComponent
+        EditPageComponent,
       ],
       imports: [
         CommonModule,
         MatToolbarModule,
         MatSidenavModule,
+        MatIconModule,
+        MatButtonModule,
+        MatListModule,
+        FormsModule,
         RouterModule.forChild([
           {
             path: '', component: AdminLayoutComponent, children: [
@@ -33,7 +41,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
           }
         ])
       ],
-      exports: [RouterModule]
+      exports: [RouterModule],
+      // schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 
 export class AdminModule {

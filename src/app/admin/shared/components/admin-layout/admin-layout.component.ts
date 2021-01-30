@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDrawer } from '@angular/material/sidenav';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-layout',
@@ -7,9 +9,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminLayoutComponent implements OnInit {
 
-  constructor() { }
+  @ViewChild('drawer') drawer: MatDrawer;
+
+  selectedMenuItem = [];
+
+  constructor(
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
+  }
+
+  handleMenuClick() {
+    this.drawer.toggle();
+    console.log(this.selectedMenuItem)
+    this.router.navigate(this.selectedMenuItem[0])
   }
 
 }

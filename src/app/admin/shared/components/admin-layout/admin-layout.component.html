@@ -1,6 +1,21 @@
 <mat-toolbar color="primary">
+    <button mat-icon-button aria-label="Open menu" (click)="drawer.toggle()">
+        <mat-icon>menu</mat-icon>
+    </button>
     <h1>My Angular Blog</h1>
 </mat-toolbar>
-<div class="container">
-    <router-outlet></router-outlet>
-</div>
+<mat-drawer-container autosize>
+    <mat-drawer #drawer mode="over">
+        <mat-selection-list #navMenu [(ngModel)]="selectedMenuItem" [multiple]="false" (click)="handleMenuClick()">
+            <mat-list-option [value]="['']">Main page</mat-list-option>
+            <mat-list-option [value]="['/admin', 'dashboard']">All posts</mat-list-option>
+            <mat-list-option [value]="['/admin', 'create']">New post</mat-list-option>
+            <mat-list-option [value]="['/admin', 'logout']">Log out</mat-list-option>
+        </mat-selection-list>
+    </mat-drawer>
+    <mat-drawer-content>
+        <div class="container">
+            <router-outlet></router-outlet>
+        </div>
+    </mat-drawer-content>
+</mat-drawer-container>

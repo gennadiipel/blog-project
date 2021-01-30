@@ -1,0 +1,25 @@
+mat-drawer-container {
+    width: 100%;
+    height: auto;
+    min-height: 100%;
+}
+
+mat-dawer-content {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+mat-drawer {
+    // padding: 20px;
+    width: 100%;
+    max-width: 800px;
+    height: 100%;
+    box-sizing: border-box;
+
+    mat-list-option {
+        width: 100%;
+    }
+}
+
