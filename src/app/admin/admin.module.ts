@@ -11,7 +11,9 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatListModule} from '@angular/material/list';
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import {MatInputModule} from '@angular/material/input';
+import {MatCardModule} from '@angular/material/card';
 
 @NgModule({
     declarations: [
@@ -29,6 +31,9 @@ import { FormsModule } from "@angular/forms";
         MatButtonModule,
         MatListModule,
         FormsModule,
+        MatCardModule,
+        MatInputModule,
+        ReactiveFormsModule,
         RouterModule.forChild([
           {
             path: '', component: AdminLayoutComponent, children: [
