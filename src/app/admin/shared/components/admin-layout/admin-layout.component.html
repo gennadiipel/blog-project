@@ -10,7 +10,7 @@
             <mat-list-option [value]="['']">Main page</mat-list-option>
             <mat-list-option [value]="['/admin', 'dashboard']">All posts</mat-list-option>
             <mat-list-option [value]="['/admin', 'create']">New post</mat-list-option>
-            <mat-list-option [value]="['/admin', 'logout']">Log out</mat-list-option>
+            <mat-list-option (click)="logout()" [value]="['/admin', 'login']">Log out</mat-list-option>
         </mat-selection-list>
     </mat-drawer>
     <mat-drawer-content>

@@ -6,10 +6,13 @@
         <form class="example-form" [formGroup]="loginFormGroup" (submit)="submit()">
             <p>
                 <mat-form-field class="example-full-width">
-                <mat-label>Username</mat-label>
-                <input type="text" matInput formControlName="login" placeholder="Your username">
-                <mat-error *ngIf="loginFormGroup.get('login').errors?.required">
+                <mat-label>Email</mat-label>
+                <input type="email" matInput formControlName="email" placeholder="samplemail@gmail.ru">
+                <mat-error *ngIf="loginFormGroup.get('email').errors?.required">
                     Please fill that field
+                </mat-error>
+                <mat-error *ngIf="loginFormGroup.get('email').errors?.email">
+                    Must be a valid email address
                 </mat-error>
                 </mat-form-field>
             </p>
@@ -23,7 +26,7 @@
                 </mat-form-field>
             </p>
             <p>
-                <button color="primary" mat-raised-button type="submit" [disabled]="loginFormGroup.invalid">Log in</button>
+                <button color="primary" mat-raised-button type="submit" [disabled]="loginFormGroup.invalid || submitted">Log in</button>
             </p>
         </form>
     </mat-card-content>

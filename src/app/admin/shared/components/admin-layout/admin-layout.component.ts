@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDrawer } from '@angular/material/sidenav';
 import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-admin-layout',
@@ -14,7 +15,8 @@ export class AdminLayoutComponent implements OnInit {
   selectedMenuItem = [];
 
   constructor(
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -24,6 +26,10 @@ export class AdminLayoutComponent implements OnInit {
     this.drawer.toggle();
     console.log(this.selectedMenuItem)
     this.router.navigate(this.selectedMenuItem[0])
+  }
+
+  logout() {
+    this.authService.logout()
   }
 
 }

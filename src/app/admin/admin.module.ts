@@ -6,14 +6,18 @@ import { AdminLayoutComponent } from './shared/components/admin-layout/admin-lay
 import { DashboardPageComponent } from './components/dashboard-page/dashboard-page.component';
 import { CreatePageComponent } from './components/create-page/create-page.component';
 import { EditPageComponent } from './components/edit-page/edit-page.component';
-import { MatToolbarModule } from "@angular/material/toolbar";
+
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatIconModule } from '@angular/material/icon';
-import {MatButtonModule} from '@angular/material/button';
-import {MatListModule} from '@angular/material/list';
+import { MatListModule } from '@angular/material/list';
+import { MatInputModule } from '@angular/material/input';
+import { MaterialSharedModule } from "../shared/modules/material-shared.module";
+
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import {MatInputModule} from '@angular/material/input';
-import {MatCardModule} from '@angular/material/card';
+import { SharedModule } from "../shared/modules/shared.module";
+import { AuthService } from "./shared/services/auth.service";
+
+
+
 
 @NgModule({
     declarations: [
@@ -25,15 +29,13 @@ import {MatCardModule} from '@angular/material/card';
       ],
       imports: [
         CommonModule,
-        MatToolbarModule,
         MatSidenavModule,
-        MatIconModule,
-        MatButtonModule,
         MatListModule,
-        FormsModule,
-        MatCardModule,
         MatInputModule,
+        MaterialSharedModule,
+        FormsModule,
         ReactiveFormsModule,
+        SharedModule,
         RouterModule.forChild([
           {
             path: '', component: AdminLayoutComponent, children: [
@@ -45,6 +47,9 @@ import {MatCardModule} from '@angular/material/card';
             ]
           }
         ])
+      ],
+      providers: [
+        AuthService
       ],
       exports: [RouterModule],
       // schemas: [CUSTOM_ELEMENTS_SCHEMA]

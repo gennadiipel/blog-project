@@ -7,11 +7,8 @@ import { MainLayoutComponent } from './shared/components/main-layout/main-layout
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { PostPageComponent } from './components/post-page/post-page.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import {MatCardModule} from '@angular/material/card';
-import {MatButtonModule} from '@angular/material/button';
 import { PostComponent } from './shared/components/post/post.component';
-import { MatIconModule } from '@angular/material/icon';
+import { MaterialSharedModule } from './shared/modules/material-shared.module';
 
 @NgModule({
   declarations: [
@@ -25,10 +22,7 @@ import { MatIconModule } from '@angular/material/icon';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatToolbarModule,
-    MatCardModule,
-    MatButtonModule,
-    MatIconModule
+    MaterialSharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]
