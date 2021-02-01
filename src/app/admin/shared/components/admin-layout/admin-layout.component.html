@@ -1,5 +1,5 @@
 <mat-toolbar color="primary">
-    <button mat-icon-button aria-label="Open menu" (click)="drawer.toggle()">
+    <button mat-icon-button aria-label="Open menu" (click)="drawer.toggle()" *ngIf="authService.isAuthenticated()">
         <mat-icon>menu</mat-icon>
     </button>
     <h1>My Angular Blog</h1>

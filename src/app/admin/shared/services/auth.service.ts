@@ -1,16 +1,19 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
+import { Observable, Subject, throwError } from "rxjs";
 import { User } from "src/app/shared/interfaces/user.interface";
 import { environment } from "src/environments/environment";
-import { tap } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
 import { FbAuthResponse } from "src/app/shared/interfaces/fb-auth-response.interface";
 
 @Injectable()
 
 export class AuthService {
+
+    public error$:Subject<string> = new Subject<string>();
+
     constructor (
-        private httpClient: HttpClient
+        private _httpClient: HttpClient
     ) {
 
     }
@@ -22,14 +25,15 @@ export class AuthService {
             return null
         }
 
-        return localStorage.getItem('fbToken')
+        return localStorage.getItem('fb-token')
     }
 
     login(user: User): Observable<any> {
         user.returnSecureToken = true;
-        return this.httpClient.post(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${environment.key}`, user)
+        return this._httpClient.post(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${environment.key}`, user)
         .pipe(
-            tap(this.setToken)
+            tap(this.setToken),
+            catchError(this.handleError.bind(this))
         )
     }
 
@@ -37,7 +41,7 @@ export class AuthService {
         this.setToken(null)
     }
 
-    isAuthenticated(user: User): boolean {
+    isAuthenticated(): boolean {
         return !!this.token
     }
 
@@ -52,5 +56,23 @@ export class AuthService {
         }
 
         
+    }
+
+    private handleError(error: HttpErrorResponse) {
+        const { message } = error.error.error
+
+        switch (message) {
+            case 'EMAIL_NOT_FOUND':
+                this.error$.next('No such email')
+                break
+            case 'INVALID_EMAIL':
+                this.error$.next('Wrong email')
+                break
+            case 'INVALID_PASSWORD':
+                this.error$.next('Wrong password')
+                break
+        }
+
+        return throwError(error)
     }
 }

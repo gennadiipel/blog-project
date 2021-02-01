@@ -11,10 +11,12 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatInputModule } from '@angular/material/input';
 import { MaterialSharedModule } from "../shared/modules/material-shared.module";
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { SharedModule } from "../shared/modules/shared.module";
 import { AuthService } from "./shared/services/auth.service";
+import { AuthGuard } from "./shared/services/auth.guard";
 
 
 
@@ -36,20 +38,22 @@ import { AuthService } from "./shared/services/auth.service";
         FormsModule,
         ReactiveFormsModule,
         SharedModule,
+        MatSnackBarModule,
         RouterModule.forChild([
           {
             path: '', component: AdminLayoutComponent, children: [
               {path: '', redirectTo: '/admin/login', pathMatch: 'full'},
               {path: 'login', component: LoginPageComponent},
-              {path: 'dashboard', component: DashboardPageComponent},
-              {path: 'create', component: CreatePageComponent},
-              {path: 'post/:id/edit', component: EditPageComponent}
+              {path: 'dashboard', component: DashboardPageComponent, canActivate: [AuthGuard]},
+              {path: 'create', component: CreatePageComponent, canActivate: [AuthGuard]},
+              {path: 'post/:id/edit', component: EditPageComponent, canActivate: [AuthGuard]}
             ]
           }
         ])
       ],
       providers: [
-        AuthService
+        AuthService,
+        AuthGuard
       ],
       exports: [RouterModule],
       // schemas: [CUSTOM_ELEMENTS_SCHEMA]

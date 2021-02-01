@@ -15,8 +15,8 @@ export class AdminLayoutComponent implements OnInit {
   selectedMenuItem = [];
 
   constructor(
-    private router: Router,
-    private authService: AuthService
+    private _router: Router,
+    public authService: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -25,7 +25,7 @@ export class AdminLayoutComponent implements OnInit {
   handleMenuClick() {
     this.drawer.toggle();
     console.log(this.selectedMenuItem)
-    this.router.navigate(this.selectedMenuItem[0])
+    this._router.navigate(this.selectedMenuItem[0])
   }
 
   logout() {
