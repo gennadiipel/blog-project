@@ -6,14 +6,14 @@
         <form class="example-form" [formGroup]="loginFormGroup" (submit)="submit()">
             <p>
                 <mat-form-field class="example-full-width">
-                <mat-label>Email</mat-label>
-                <input type="email" matInput formControlName="email" placeholder="samplemail@gmail.ru">
-                <mat-error *ngIf="loginFormGroup.get('email').errors?.required">
-                    Please fill that field
-                </mat-error>
-                <mat-error *ngIf="loginFormGroup.get('email').errors?.email">
-                    Must be a valid email address
-                </mat-error>
+                    <mat-label>Email</mat-label>
+                    <input type="email" matInput formControlName="email" placeholder="samplemail@gmail.ru">
+                    <mat-error *ngIf="loginFormGroup.get('email').errors?.required">
+                        Please fill that field
+                    </mat-error>
+                    <mat-error *ngIf="loginFormGroup.get('email').errors?.email">
+                        Must be a valid email address
+                    </mat-error>
                 </mat-form-field>
             </p>
             <p>

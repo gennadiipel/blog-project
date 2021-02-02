@@ -1,1 +1,45 @@
-<p>create-page works!</p>
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>Create new post</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <form [formGroup]="createPostForm">
+            <mat-form-field appearance="standard">
+                <mat-label>Post title</mat-label>
+                <input matInput placeholder="Very interesting story" formControlName="postTitle">
+                <mat-error *ngIf="createPostForm.get('postTitle').errors?.required">Fill that field!</mat-error>
+                <mat-error *ngIf="createPostForm.get('postTitle').errors?.minlength">
+                    Min length - {{ createPostForm.get('postTitle').errors?.minlength.requiredLength }}
+                </mat-error>
+                <mat-error *ngIf="createPostForm.get('postTitle').errors?.maxlength">
+                    Min length - {{ createPostForm.get('postTitle').errors?.maxlength.requiredLength }}
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="standard">
+                <mat-label>Author</mat-label>
+                <input matInput placeholder="Gennadii" formControlName="author">
+                <mat-error *ngIf="createPostForm.get('author').errors?.required">Fill that field!</mat-error>
+                <mat-error *ngIf="createPostForm.get('author').errors?.minlength">
+                    Min length - {{ createPostForm.get('author').errors?.minlength.requiredLength }}
+                </mat-error>
+                <mat-error *ngIf="createPostForm.get('author').errors?.maxlength">
+                    Min length - {{ createPostForm.get('author').errors?.maxlength.requiredLength }}
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="standard" appearance="fill">
+                <mat-label>Text</mat-label>
+                <textarea matInput formControlName="text"></textarea>
+                <mat-error *ngIf="createPostForm.get('text').errors?.required">Fill that field!</mat-error>
+                <mat-error *ngIf="createPostForm.get('text').errors?.minlength">
+                    Min length - {{ createPostForm.get('text').errors?.minlength.requiredLength }}
+                </mat-error>
+                <mat-error *ngIf="createPostForm.get('text').errors?.maxlength">
+                    Min length - {{ createPostForm.get('text').errors?.maxlength.requiredLength }}
+                </mat-error>
+            </mat-form-field>
+        </form>
+    </mat-card-content>
+    <mat-card-actions>
+        <button mat-flat-button color="primary" [disabled]="createPostForm.invalid">Post</button>
+    </mat-card-actions>
+</mat-card>

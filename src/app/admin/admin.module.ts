@@ -17,6 +17,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { SharedModule } from "../shared/modules/shared.module";
 import { AuthService } from "./shared/services/auth.service";
 import { AuthGuard } from "./shared/services/auth.guard";
+import { QuillModule } from "ngx-quill";
 
 
 
@@ -39,6 +40,7 @@ import { AuthGuard } from "./shared/services/auth.guard";
         ReactiveFormsModule,
         SharedModule,
         MatSnackBarModule,
+        QuillModule.forRoot(),
         RouterModule.forChild([
           {
             path: '', component: AdminLayoutComponent, children: [
