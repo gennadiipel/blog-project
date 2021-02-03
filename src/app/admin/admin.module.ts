@@ -15,9 +15,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { SharedModule } from "../shared/modules/shared.module";
-import { AuthService } from "./shared/services/auth.service";
 import { AuthGuard } from "./shared/services/auth.guard";
-import { QuillModule } from "ngx-quill";
 
 
 
@@ -40,7 +38,6 @@ import { QuillModule } from "ngx-quill";
         ReactiveFormsModule,
         SharedModule,
         MatSnackBarModule,
-        QuillModule.forRoot(),
         RouterModule.forChild([
           {
             path: '', component: AdminLayoutComponent, children: [
@@ -54,11 +51,9 @@ import { QuillModule } from "ngx-quill";
         ])
       ],
       providers: [
-        AuthService,
         AuthGuard
       ],
       exports: [RouterModule],
-      // schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 
 export class AdminModule {

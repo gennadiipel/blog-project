@@ -2,5 +2,7 @@
 
 export interface Environment {
     key: 'AIzaSyDyz89yLOwTxrSAnzddTvdyYmfzOOFvJnc',
-    production: boolean
+    production: boolean,
+
+    fbDBHost: 'https://angular-blog-c517e-default-rtdb.firebaseio.com/',
 }

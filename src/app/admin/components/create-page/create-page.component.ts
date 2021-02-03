@@ -1,5 +1,10 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Post } from 'src/app/shared/interfaces/post.interface';
+import { PostsService } from 'src/app/shared/services/posts.service';
+import { AuthService } from '../../shared/services/auth.service';
 
 @Component({
   selector: 'app-create-page',
@@ -10,7 +15,10 @@ export class CreatePageComponent implements OnInit {
 
   createPostForm: FormGroup
 
-  constructor() { }
+  constructor(
+    private _postsService: PostsService,
+    private _matSnackBar: MatSnackBar
+  ) { }
 
   ngOnInit(): void {
     this.createPostForm = new FormGroup({
@@ -18,12 +26,24 @@ export class CreatePageComponent implements OnInit {
       'author': new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(48)]),
       'text': new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(1024)])
     });
+
+    
   }
 
   submit() {
     if (this.createPostForm.invalid) {
       return
     }
+
+    const post:Post = {...this.createPostForm.value};
+
+    this._postsService.create(post).subscribe(resp => {
+      this._matSnackBar.open('Post created!', '', {
+        duration: 5000
+      })
+      this.createPostForm.reset()
+    })
+
   }
 
 }

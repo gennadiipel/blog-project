@@ -20,7 +20,7 @@ export class LoginPageComponent implements OnInit, OnDestroy {
   constructor(
     private _authService: AuthService,
     private _router: Router,
-    private _snackBar:MatSnackBar
+    private _snackBar:MatSnackBar,
   ) { }
 
   ngOnInit(): void {
@@ -38,6 +38,7 @@ export class LoginPageComponent implements OnInit, OnDestroy {
       });
       this.submitted = false
     })
+
   }
 
   ngOnDestroy(): void {

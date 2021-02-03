@@ -8,6 +8,9 @@ import { NgModule } from "@angular/core";
 
     exports: [
         HttpClientModule
+    ],
+
+    providers: [
     ]
 })
 
