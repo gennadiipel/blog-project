@@ -2,17 +2,17 @@
     <mat-card-header>
         <mat-card-title>Create new post</mat-card-title>
     </mat-card-header>
-    <form [formGroup]="createPostForm" (submit)="submit()">
+    <form [formGroup]="createPostForm" (submit)="submit()" #newPostForm="ngForm">
         <mat-card-content>
             <mat-form-field appearance="standard">
                 <mat-label>Post title</mat-label>
-                <input matInput placeholder="Very interesting story" formControlName="postTitle">
-                <mat-error *ngIf="createPostForm.get('postTitle').errors?.required">Fill that field!</mat-error>
-                <mat-error *ngIf="createPostForm.get('postTitle').errors?.minlength">
-                    Min length - {{ createPostForm.get('postTitle').errors?.minlength.requiredLength }}
+                <input matInput placeholder="Very interesting story" formControlName="title">
+                <mat-error *ngIf="createPostForm.get('title').errors?.required">Fill that field!</mat-error>
+                <mat-error *ngIf="createPostForm.get('title').errors?.minlength">
+                    Min length - {{ createPostForm.get('title').errors?.minlength.requiredLength }}
                 </mat-error>
-                <mat-error *ngIf="createPostForm.get('postTitle').errors?.maxlength">
-                    Min length - {{ createPostForm.get('postTitle').errors?.maxlength.requiredLength }}
+                <mat-error *ngIf="createPostForm.get('title').errors?.maxlength">
+                    Min length - {{ createPostForm.get('title').errors?.maxlength.requiredLength }}
                 </mat-error>
             </mat-form-field>
             <mat-form-field appearance="standard">

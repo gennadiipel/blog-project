@@ -1,1 +1,13 @@
-<p>dashboard-page works!</p>
+<h2>All posts</h2>
+<mat-list>
+    <mat-list-item *ngFor="let post of posts; let id = index">
+        <mat-icon mat-list-icon>note</mat-icon>
+        <div mat-line>{{ post.title | excerpt:32 }}</div>
+        <div mat-line>Created by {{ post.author }} on {{ post.author }}</div>
+        <div>
+            <a [routerLink]="['/post',post.id]" mat-raised-button color="primary" class="action-button">Open</a>
+            <a [routerLink]="['/admin','post', post.id, 'edit']" mat-raised-button color="accent" class="action-button">Edit</a>
+            <button (click)="deletePost(post.id)" mat-raised-button color="warn" class="action-button">Delete</button>
+        </div>
+    </mat-list-item>
+</mat-list>

@@ -10,8 +10,9 @@ import { FbCreateResponse } from "../interfaces/fb-create-response.interface";
 
 export class PostsService {
     constructor( private _http: HttpClient ) {}
-
+    
     create(post: Post): Observable<Post> {
+        post.date = new Date()
         return this._http.post(`${environment.fbDBHost}/posts.json`, post)
         .pipe(
             map((response: FbCreateResponse) => {
@@ -22,5 +23,23 @@ export class PostsService {
                 }
             })
         );
+    }
+
+
+    getAll(): Observable<Post[]> {
+        return this._http.get(`${environment.fbDBHost}/posts.json`)
+        .pipe(
+            map(
+                (response:{[key: string]: any}) => {
+                    
+                    return (response) ? Object.keys(response)
+                    .map(key => ({
+                        ...response[key],
+                        id: key,
+                        date: new Date(response[key].date)
+                    })) : []
+                }
+            )
+        )
     }
 }

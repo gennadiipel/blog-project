@@ -16,17 +16,18 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { SharedModule } from "../shared/modules/shared.module";
 import { AuthGuard } from "./shared/services/auth.guard";
+import { ExcerptPipe } from "../shared/pipes/excerpt.pipe";
 
 
 
 
 @NgModule({
-    declarations: [
+      declarations: [
         AdminLayoutComponent,
         LoginPageComponent,
         DashboardPageComponent,
         CreatePageComponent,
-        EditPageComponent,
+        EditPageComponent
       ],
       imports: [
         CommonModule,
