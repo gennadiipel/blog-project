@@ -24,7 +24,6 @@ export class AdminLayoutComponent implements OnInit {
 
   handleMenuClick() {
     this.drawer.toggle();
-    console.log(this.selectedMenuItem)
     this._router.navigate(this.selectedMenuItem[0])
   }
 

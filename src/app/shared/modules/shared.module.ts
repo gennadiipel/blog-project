@@ -1,12 +1,14 @@
 import { HttpClientModule } from "@angular/common/http";
 import { NgModule } from "@angular/core";
 import { ExcerptPipe } from "../pipes/excerpt.pipe";
+import { PostsFilterPipe } from "../pipes/posts-filter.pipe";
 
 
 @NgModule({
 
     declarations: [
-        ExcerptPipe
+        ExcerptPipe,
+        PostsFilterPipe
     ],
 
     imports: [
@@ -15,7 +17,8 @@ import { ExcerptPipe } from "../pipes/excerpt.pipe";
 
     exports: [
         HttpClientModule,
-        ExcerptPipe
+        ExcerptPipe,
+        PostsFilterPipe
     ],
 
     providers: [

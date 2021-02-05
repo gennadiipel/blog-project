@@ -5,3 +5,17 @@
 .action-button {
     margin-right: 10px;
 }
+
+
+mat-form-field {
+    width: 100%;
+}
+
+.mat-radio-button ~ .mat-radio-button {
+    margin-left: 16px;
+}
+
+mat-radio-group {
+    display: block;
+    margin-bottom: 10px;
+}

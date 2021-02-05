@@ -1,17 +1,30 @@
+import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { Post } from 'src/app/shared/interfaces/post.interface';
 import { PostsService } from 'src/app/shared/services/posts.service';
+import { PostListItem } from '../../shared/interfaces/post-list-item.interface';
 
 @Component({
   selector: 'app-dashboard-page',
   templateUrl: './dashboard-page.component.html',
-  styleUrls: ['./dashboard-page.component.scss']
+  styleUrls: ['./dashboard-page.component.scss'],
+  animations: [
+    trigger('deleteItem', [
+      state('start', style({
+        transform: 'translateX(-40%)',
+        opacity: '0'
+      })),
+      transition('* => start', animate(200))
+    ])
+  ]
 })
 export class DashboardPageComponent implements OnInit, OnDestroy {
 
-  posts:Post[]
+  postListItems:PostListItem[] = []
   getAllPostsSubscription$: Subscription
+  loadingPosts: boolean = true
+  searchQuery: string = ''
+  searchType: string = 'title'
 
   constructor(
     private _postsService: PostsService
@@ -19,7 +32,14 @@ export class DashboardPageComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.getAllPostsSubscription$ = this._postsService.getAll().subscribe(response => {
-      this.posts = response
+
+      response.forEach(post => {
+        this.postListItems.push({
+          post,
+          loading: false
+        })
+      })
+      this.loadingPosts = false
     })
   }
 
@@ -27,6 +47,20 @@ export class DashboardPageComponent implements OnInit, OnDestroy {
     this.getAllPostsSubscription$.unsubscribe();
   }
 
-  deletePost(id: string) {}
+  deletePost(id: number) {
+    this.postListItems[id].loading = true
+    
+
+    this._postsService.delete(this.postListItems[id].post.id)
+    .subscribe(() => {
+      this.postListItems[id].loading = false
+      this.postListItems[id].animationState = 'start'
+
+      setTimeout(() => {
+        this.postListItems = this.postListItems.filter((item, i) => i != id)
+      }, 300)
+      
+    })
+  }
 
 }

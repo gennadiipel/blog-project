@@ -1,13 +1,28 @@
 <h2>All posts</h2>
+<mat-form-field class="example-full-width">
+    <mat-label>Search query</mat-label>
+    <input autocomplete="off" [(ngModel)]="searchQuery" matInput placeholder="Title">
+</mat-form-field>
+<mat-radio-group [(ngModel)]="searchType" aria-label="Select an option">
+    <mat-radio-button value="title" checked>Title</mat-radio-button>
+    <mat-radio-button value="author">Author</mat-radio-button>
+</mat-radio-group>
+<mat-spinner diameter="30" *ngIf="loadingPosts"></mat-spinner>
 <mat-list>
-    <mat-list-item *ngFor="let post of posts; let id = index">
+    <mat-list-item *ngFor="let post of postListItems | excerpt:32 | postsFilter:searchType:searchQuery; let id = index" [@deleteItem]="post.animationState">
         <mat-icon mat-list-icon>note</mat-icon>
-        <div mat-line>{{ post.title | excerpt:32 }}</div>
-        <div mat-line>Created by {{ post.author }} on {{ post.author }}</div>
+        <div mat-line [innerHTML]="post.searchTitle"></div>
+        <div mat-line>
+            <mat-progress-bar mode="query" *ngIf="post.loading; else postData"></mat-progress-bar>
+            <ng-template #postData>
+                <span [innerHTML]="'by ' + post.searchAuthor + ' on ' + (post.post.date | date)">by {{ post.searchAuthor }} on {{ post.post.date | date }}</span>
+            </ng-template> 
+        </div>
         <div>
-            <a [routerLink]="['/post',post.id]" mat-raised-button color="primary" class="action-button">Open</a>
-            <a [routerLink]="['/admin','post', post.id, 'edit']" mat-raised-button color="accent" class="action-button">Edit</a>
-            <button (click)="deletePost(post.id)" mat-raised-button color="warn" class="action-button">Delete</button>
+            <a [routerLink]="['/post',post.post.id]" mat-raised-button color="primary" class="action-button">Open</a>
+            <a [routerLink]="['/admin','post', post.post.id, 'edit']" mat-raised-button color="accent" class="action-button">Edit</a>
+            <button [disabled]="post.loading" (click)="deletePost(id)" mat-raised-button color="warn" class="action-button">Delete</button>
         </div>
     </mat-list-item>
 </mat-list>
+<p *ngIf="postListItems.length == 0 && !loadingPosts"><b>No posts</b></p>

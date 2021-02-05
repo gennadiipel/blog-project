@@ -16,7 +16,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { SharedModule } from "../shared/modules/shared.module";
 import { AuthGuard } from "./shared/services/auth.guard";
-import { ExcerptPipe } from "../shared/pipes/excerpt.pipe";
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 
 
@@ -39,6 +39,7 @@ import { ExcerptPipe } from "../shared/pipes/excerpt.pipe";
         ReactiveFormsModule,
         SharedModule,
         MatSnackBarModule,
+        MatProgressBarModule,
         RouterModule.forChild([
           {
             path: '', component: AdminLayoutComponent, children: [
