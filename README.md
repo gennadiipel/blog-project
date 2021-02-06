@@ -4,6 +4,6 @@ Simple CRUD Angular blog
 
 # What's inside?
 
-Angular Materials
-Angular Animations
-Firebase
+Angular Materials<br>
+Angular Animations<br>
+Firebase<br>

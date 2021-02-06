@@ -12,6 +12,7 @@ import { PostsService } from 'src/app/shared/services/posts.service';
 export class CreatePageComponent implements OnInit {
 
   createPostForm: FormGroup
+  formSubmitted: boolean = false
   @ViewChild('newPostForm') newPostForm;
 
   constructor(
@@ -32,6 +33,8 @@ export class CreatePageComponent implements OnInit {
       return
     }
 
+    this.formSubmitted = true
+
     const post:Post = {...this.createPostForm.value};
 
     this._postsService.create(post).subscribe(resp => {
@@ -39,6 +42,8 @@ export class CreatePageComponent implements OnInit {
         duration: 5000
       })
       
+      this.formSubmitted = false
+
       this.newPostForm.resetForm();
 
     })
