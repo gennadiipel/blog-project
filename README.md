@@ -2,8 +2,9 @@
 
 Simple CRUD Angular blog
 
-# What's inside?
+# With what I worked?
 
 Angular Materials<br>
 Angular Animations<br>
+RxJS<br>
 Firebase<br>
