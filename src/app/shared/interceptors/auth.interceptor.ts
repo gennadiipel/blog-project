@@ -16,11 +16,13 @@ export class AuthInterceptor implements HttpInterceptor {
         ) {}
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        req = req.clone({
-            setParams: {
-                auth: this._authService.token
-            }
-        })
+        if (this._authService.isAuthenticated()) {
+            req = req.clone({
+                setParams: {
+                    auth: this._authService.token
+                }
+            })
+        }
 
         return next.handle(req)
         .pipe(

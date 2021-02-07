@@ -9,9 +9,13 @@
 </mat-radio-group>
 <mat-spinner diameter="30" *ngIf="loadingPosts"></mat-spinner>
 <mat-list>
-    <mat-list-item *ngFor="let post of postListItems | excerpt:32 | postsFilter:searchType:searchQuery; let id = index" [@deleteItem]="post.animationState">
+    <mat-list-item *ngFor="let post of postListItems | postsFilter:searchType:searchQuery; let id = index" [@deleteItem]="post.animationState">
         <mat-icon mat-list-icon>note</mat-icon>
-        <div mat-line [innerHTML]="post.searchTitle"></div>
+        <div mat-line [innerHTML]="post.searchTitle | excerpt:55" *ngIf="searchQuery; else pureTitle"></div>
+        <ng-template #pureTitle>
+            <div mat-line [innerHTML]="post.searchTitle | excerpt:48"></div>
+        </ng-template>
+        
         <div mat-line>
             <mat-progress-bar mode="query" *ngIf="post.loading; else postData"></mat-progress-bar>
             <ng-template #postData>

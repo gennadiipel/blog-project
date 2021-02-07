@@ -24,6 +24,7 @@ export class PostsFilterPipe implements PipeTransform {
             const start = lowerCaseString.indexOf(query.toLowerCase())
             const end = start + query.length
             const resultLine = `${item.post[type].slice(0, start)}<b>${item.post[type].slice(start, end)}</b>${item.post[type].slice(end)}`
+            console.log(resultLine)
             if (type == 'title') queryResult[i].searchTitle = resultLine
             else queryResult[i].searchAuthor = resultLine 
         })
